@@ -1,0 +1,20 @@
+<div class="app-shell">
+  <p-toolbar styleClass="topbar">
+    <div class="p-toolbar-group-left brand">
+      <span class="logo">PH</span>
+      <a routerLink="/">PhoneHub</a>
+    </div>
+    <div class="p-toolbar-group-right nav-links">
+      <button pButton type="button" label="Phones" class="p-button-text" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></button>
+    <!--- <button pButton type="button" label="Cart" class="p-button-text" routerLink="/cart" routerLinkActive="active"></button> -->
+      <button pButton type="button" label="Checkout" class="p-button-text" routerLink="/checkout" routerLinkActive="active"></button>
+      <button pButton type="button" class="p-button-rounded cart-pill" routerLink="/cart">
+        <i class="pi pi-shopping-cart" pBadge [value]="((cartCount$ | async) || 0).toString()"></i>
+      </button>
+    </div>
+  </p-toolbar>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

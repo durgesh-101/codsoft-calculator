@@ -1,0 +1,63 @@
+.checkout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 24px;
+}
+
+.form ::ng-deep .p-card-body {
+  padding: 24px;
+}
+
+.form form {
+  display: grid;
+  gap: 14px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.summary ::ng-deep .p-card-body {
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 700;
+  border-top: 1px solid rgba(148, 163, 184, 0.3);
+  padding-top: 12px;
+}
+
+.success ::ng-deep .p-card-body {
+  padding: 32px;
+  text-align: center;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+@media (max-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,109 @@
+<section class="page">
+  <div class="page-header">
+    <div class="hero-copy">
+      <p class="eyebrow">Curated picks</p>
+      <h1>Phone Listing</h1>
+      <p class="muted">Pick the perfect device. Compare specs, add favorites to cart, and checkout in seconds.</p>
+      <div class="hero-metrics">
+        <div class="metric-chip">
+          <span class="metric-value">{{ products.length }}</span>
+          <span class="metric-label">models</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-value">24h</span>
+          <span class="metric-label">dispatch</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-value">&#8377;20k+</span>
+          <span class="metric-label">free delivery</span>
+        </div>
+      </div>
+    </div>
+    <p-card styleClass="highlight-card">
+      <p class="highlight-label">Buyer benefit</p>
+      <p class="highlight-title">Compare before you choose</p>
+      <p class="highlight-sub">A table layout for quick spec checks, with product pages still one click away.</p>
+    </p-card>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-caption">
+      <div>
+        <p class="caption-kicker">Catalog view</p>
+        <h2>Shop by specs</h2>
+      </div>
+      <p class="caption-copy">Tap a row to open full details, or add directly to cart from the table.</p>
+    </div>
+
+    <p-table
+      [value]="products"
+      [paginator]="true"
+      [rows]="pageSize"
+      [rowsPerPageOptions]="[6, 12, 18]"
+      [scrollable]="true"
+      scrollHeight="420px"
+      [frozenWidth]="frozenColumnWidth"
+      [tableStyle]="{ 'min-width': tableMinWidth }"
+      styleClass="product-table"
+       
+    >
+      <ng-template pTemplate="frozenheader">
+        <tr>
+          <th class="name-col">Name</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="frozenbody" let-product>
+        <tr class="product-row" (click)="goToProduct(product)">
+          <td class="name-col">
+            <div class="product-copy">
+              <div class="product-name">{{ product.name }}</div>
+              <div class="product-desc">{{ product.description }}</div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="meta-col">Brand</th>
+          <th class="image-col">Image</th>
+          <th class="meta-col">Storage</th>
+          <th class="meta-col">Camera</th>
+          <th class="meta-col">Battery</th>
+          <th class="meta-col">Screen</th>
+          <th class="price-col">Price</th>
+          <th class="action-col">Action</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-product>
+        <tr class="product-row" (click)="goToProduct(product)">
+          <td>
+            <span class="brand-pill">{{ product.brand }}</span>
+          </td>
+          <td class="image-col">
+            <div class="product-thumb">
+              <img [src]="product.image" [alt]="product.name" class="product-img">
+            </div>
+          </td>
+          <td><span class="spec-pill">{{ product.storage }}</span></td>
+          <td><span class="spec-pill">{{ product.camera }}</span></td>
+          <td><span class="spec-pill">{{ product.battery }}</span></td>
+          <td><span class="spec-pill">{{ product.screen }}</span></td>
+          <td class="price">&#8377;{{ product.price }}</td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="Add to cart"
+              icon="pi pi-shopping-cart"
+              class="p-button-rounded p-button-sm action-btn"
+              (click)="addToCart(product, $event)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+<section class="cart">
+  <div class="cart-header">
+    <div>
+      <p class="eyebrow">Checkout queue</p>
+      <h1>Your Cart</h1>
+      <p class="muted">Review selections, adjust quantities, and head to checkout when everything looks right.</p>
+    </div>
+
+    <ng-container *ngIf="(items$ | async) as items">
+      <div class="cart-metrics" *ngIf="items.length">
+        <div class="metric-chip">
+          <span class="metric-value">{{ items.length }}</span>
+          <span class="metric-label">items</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-value">&#8377;{{ getTotal() }}</span>
+          <span class="metric-label">total</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="(items$ | async) as items">
+    <div class="cart-grid" *ngIf="items.length; else emptyState">
+      <div class="cart-items">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Cart items</p>
+            <h2>Ready to ship</h2>
+          </div>
+          <span class="section-pill">{{ items.length }} selected</span>
+        </div>
+
+        <p-card class="cart-item" *ngFor="let item of items">
+          <ng-template pTemplate="content">
+            <div class="item-info">
+              <div class="item-visual">
+                <img [src]="item.product.image" [alt]="item.product.name" class="item-img">
+              </div>
+
+              <div class="item-copy">
+                <span class="item-brand">{{ item.product.brand }}</span>
+                <h3>{{ item.product.name }}</h3>
+                <p class="muted">{{ item.product.description }}</p>
+
+                <div class="item-specs">
+                  <span class="spec-chip">{{ item.product.storage }}</span>
+                  <span class="spec-chip">{{ item.product.camera }}</span>
+                  <span class="spec-chip">{{ item.product.battery }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-actions">
+              <div class="qty">
+                <button pButton type="button" icon="pi pi-minus" class="p-button-rounded p-button-text qty-btn" (click)="decrement(item)"></button>
+                <span>{{ item.quantity }}</span>
+                <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-text qty-btn" (click)="increment(item)"></button>
+              </div>
+
+              <div class="price-block">
+                <span class="price-label">Line total</span>
+                <span class="price">&#8377;{{ item.product.price * item.quantity }}</span>
+              </div>
+
+              <button pButton type="button" label="Remove" class="p-button-text p-button-danger remove-btn" (click)="remove(item)"></button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+
+      <p-card class="summary">
+        <ng-template pTemplate="content">
+          <p class="section-kicker">Summary</p>
+          <h2>Order Summary</h2>
+          <p class="summary-copy">A quick snapshot before you move to payment.</p>
+
+          <div class="summary-panel">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>&#8377;{{ getTotal() }}</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
+            <div class="summary-row">
+              <span>Items</span>
+              <span>{{ items.length }}</span>
+            </div>
+          </div>
+
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>&#8377;{{ getTotal() }}</span>
+          </div>
+
+          <button pButton type="button" label="Checkout" class="p-button-rounded checkout-btn" routerLink="/checkout"></button>
+          <button pButton type="button" label="Keep shopping" class="p-button-text continue-btn" routerLink="/"></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </ng-container>
+
+  <ng-template #emptyState>
+    <p-card class="empty">
+      <ng-template pTemplate="content">
+        <p class="section-kicker">Cart empty</p>
+        <h2>No phones added yet</h2>
+        <p class="muted">Browse the catalog and add a few favorites to start building your order.</p>
+        <button pButton type="button" label="Browse phones" class="p-button-rounded" routerLink="/"></button>
+      </ng-template>
+    </p-card>
+  </ng-template>
+</section>

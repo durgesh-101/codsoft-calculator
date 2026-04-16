@@ -1,0 +1,53 @@
+﻿<section class="checkout">
+  <div class="header">
+    <h1>Checkout</h1>
+    <p class="muted">Confirm delivery details and finalize your order.</p>
+  </div>
+
+  <p-card class="success" *ngIf="orderPlaced">
+    <ng-template pTemplate="content">
+      <h2>Order confirmed</h2>
+      <p>Your phones are on the way. A confirmation email is landing shortly.</p>
+      <button pButton type="button" label="Continue shopping" class="p-button-rounded" routerLink="/"></button>
+    </ng-template>
+  </p-card>
+
+  <div class="checkout-grid" *ngIf="!orderPlaced">
+    <p-card class="form">
+      <ng-template pTemplate="content">
+        <form (ngSubmit)="placeOrder()">
+          <label>
+            Full name
+            <input pInputText type="text" name="name" [(ngModel)]="customer.name" required />
+          </label>
+          <label>
+            Email address
+            <input pInputText type="email" name="email" [(ngModel)]="customer.email" required />
+          </label>
+          <label>
+            Delivery address
+            <textarea pInputTextarea name="address" rows="4" [(ngModel)]="customer.address" required></textarea>
+          </label>
+          <button pButton type="submit" label="Place order" class="p-button-rounded"></button>
+        </form>
+      </ng-template>
+    </p-card>
+
+    <p-card class="summary">
+      <ng-template pTemplate="content">
+        <h2>Order summary</h2>
+        <div class="summary-list" *ngIf="(items$ | async) as items">
+          <div class="summary-item" *ngFor="let item of items">
+            <span>{{ item.product.name }}</span>
+            <span>{{ item.quantity }} * &#8377;{{ item.product.price }}</span>
+          </div>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span>&#8377;{{ getTotal() }}</span>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</section>
+

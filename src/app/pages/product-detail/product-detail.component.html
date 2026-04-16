@@ -1,0 +1,43 @@
+<section class="detail" *ngIf="product">
+  <button pButton type="button" label="Back to listing" icon="pi pi-arrow-left" class="p-button-text" routerLink="/"></button>
+  <div class="detail-grid">
+    <p-card styleClass="detail-visual" [style.background]="product.color">
+      <ng-template pTemplate="content">
+        <img [src]="product.image" alt="{{product.name}}" class="detail-img">
+        <div class="brand">{{ product.brand }}</div>
+        <h1>{{ product.name }}</h1>
+        <p class="price">&#8377;{{ product.price }}</p>
+      </ng-template>
+    </p-card>
+
+    <p-card styleClass="detail-body">
+      <ng-template pTemplate="content">
+        <h2>Why you'll love it</h2>
+        <p class="desc">{{ product.description }}</p>
+
+        <div class="spec-grid">
+          <div>
+            <p class="spec-label">Screen</p>
+            <p>{{ product.screen }}</p>
+          </div>
+          <div>
+            <p class="spec-label">Storage</p>
+            <p>{{ product.storage }}</p>
+          </div>
+          <div>
+            <p class="spec-label">Camera</p>
+            <p>{{ product.camera }}</p>
+          </div>
+          <div>
+            <p class="spec-label">Battery</p>
+            <p>{{ product.battery }}</p>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button pButton type="button" label="Add to cart" class="p-button-rounded" (click)="addToCart()"></button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</section>

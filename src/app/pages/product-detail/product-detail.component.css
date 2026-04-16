@@ -1,0 +1,86 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 24px;
+}
+.detail-img {
+  width: 100%;
+  height: 135px;       /* 👈 control height */
+  object-fit: contain; /* keeps full image visible */
+  margin-bottom: 10px;
+}
+
+.detail-visual {
+  border-radius: 24px;
+  color: #fff;
+  min-height: 280px;
+}
+
+.detail-visual ::ng-deep .p-card-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+}
+
+.brand {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 12px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.detail-body {
+  border-radius: 24px;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
+
+.detail-body ::ng-deep .p-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.desc {
+  color: #4b5563;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.spec-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
