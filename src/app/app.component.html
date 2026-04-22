@@ -2,15 +2,31 @@
   <p-toolbar styleClass="topbar">
     <div class="p-toolbar-group-left brand">
       <span class="logo">PH</span>
-      <a routerLink="/">PhoneHub</a>
+      <a [routerLink]="(isAuthenticated$ | async) ? '/' : '/login'">PhoneHub</a>
     </div>
     <div class="p-toolbar-group-right nav-links">
-      <button pButton type="button" label="Phones" class="p-button-text" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></button>
-    <!--- <button pButton type="button" label="Cart" class="p-button-text" routerLink="/cart" routerLinkActive="active"></button> -->
-      <button pButton type="button" label="Checkout" class="p-button-text" routerLink="/checkout" routerLinkActive="active"></button>
-      <button pButton type="button" class="p-button-rounded cart-pill" routerLink="/cart">
-        <i class="pi pi-shopping-cart" pBadge [value]="((cartCount$ | async) || 0).toString()"></i>
-      </button>
+      <ng-container *ngIf="isAuthenticated$ | async; else guestActions">
+        <button pButton type="button" label="Phones" class="p-button-text" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></button>
+        <button
+          *ngIf="(currentUser$ | async)?.role === 'admin'"
+          pButton
+          type="button"
+          label="Admin"
+          class="p-button-text"
+          routerLink="/admin"
+          routerLinkActive="active"
+        ></button>
+        <button pButton type="button" label="Checkout" class="p-button-text" routerLink="/checkout" routerLinkActive="active"></button>
+        <button pButton type="button" class="p-button-rounded cart-pill" routerLink="/cart">
+          <i class="pi pi-shopping-cart" pBadge [value]="((cartCount$ | async) || 0).toString()"></i>
+        </button>
+        <span class="welcome-copy" *ngIf="currentUser$ | async as currentUser">Hi, {{ currentUser.name }}<span class="role-pill">{{ currentUser.role }}</span></span>
+        <button pButton type="button" label="Logout" class="p-button-text" (click)="logout()"></button>
+      </ng-container>
+      <ng-template #guestActions>
+        <button pButton type="button" label="Login" class="p-button-text" routerLink="/login" routerLinkActive="active"></button>
+        <button pButton type="button" label="Sign up" class="p-button-rounded auth-cta" routerLink="/signup" routerLinkActive="active"></button>
+      </ng-template>
     </div>
   </p-toolbar>
 

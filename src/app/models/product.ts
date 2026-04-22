@@ -16,3 +16,20 @@ export interface CartItem {
   product: Product;
   quantity: number;
 }
+
+export interface Order {
+  id: number;
+  customer: {
+    name: string;
+    email: string;
+    address: string;
+  };
+  items: CartItem[];
+  total: number;
+  placedAt: string;
+  placedBy: {
+    name: string;
+    email: string;
+    role: 'user' | 'admin';
+  };
+}

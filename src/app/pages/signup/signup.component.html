@@ -1,0 +1,74 @@
+<section class="auth-page">
+  <p-card styleClass="auth-card">
+    <ng-template pTemplate="content">
+      <p class="auth-kicker">Join PhoneHub</p>
+      <h1>Create your account</h1>
+      <p class="auth-copy">Sign up once and keep the catalog, cart, and checkout flow behind your account.</p>
+
+      <form class="auth-form" #signupForm="ngForm" (ngSubmit)="signup()" novalidate>
+        <label>
+          Full name
+          <input
+            pInputText
+            type="text"
+            name="name"
+            [(ngModel)]="account.name"
+            #name="ngModel"
+            required
+          />
+        </label>
+        <small class="error" *ngIf="name.invalid && name.touched">Full name is required.</small>
+
+        <label>
+          Email address
+          <input
+            pInputText
+            type="email"
+            name="email"
+            [(ngModel)]="account.email"
+            #email="ngModel"
+            required
+            email
+          />
+        </label>
+        <small class="error" *ngIf="email.invalid && email.touched">Enter a valid email address.</small>
+
+        <label>
+          Password
+          <input
+            pInputText
+            type="password"
+            name="password"
+            [(ngModel)]="account.password"
+            #password="ngModel"
+            required
+            minlength="6"
+          />
+        </label>
+        <small class="error" *ngIf="password.invalid && password.touched">Password must be at least 6 characters.</small>
+
+        <label>
+          Confirm password
+          <input
+            pInputText
+            type="password"
+            name="confirmPassword"
+            [(ngModel)]="account.confirmPassword"
+            #confirmPassword="ngModel"
+            required
+          />
+        </label>
+        <small class="error" *ngIf="confirmPassword.invalid && confirmPassword.touched">Confirm your password.</small>
+
+        <p class="error-banner" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+        <button pButton type="submit" label="Create account" class="p-button-rounded auth-submit" [disabled]="signupForm.invalid"></button>
+      </form>
+
+      <p class="auth-switch">
+        Already have an account?
+        <a routerLink="/login" [queryParams]="{ returnUrl: returnUrl }">Login</a>
+      </p>
+    </ng-template>
+  </p-card>
+</section>

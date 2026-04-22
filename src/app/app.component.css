@@ -49,8 +49,30 @@
   font-weight: 700;
 }
 
+.welcome-copy {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  margin-left: 8px;
+}
+
+.role-pill {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #ffedd5;
+  color: #9a3412;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+ }
+
 .cart-pill {
   margin-left: 8px;
+}
+
+.auth-cta {
+  margin-left: 6px;
 }
 
 .content {
@@ -58,6 +80,10 @@
 }
 
 @media (max-width: 900px) {
+  .welcome-copy {
+    display: none;
+  }
+
   .content {
     padding: 24px 16px;
   }

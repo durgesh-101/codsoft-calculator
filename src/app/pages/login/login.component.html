@@ -1,0 +1,57 @@
+<section class="auth-page">
+  <p-card styleClass="auth-card">
+    <ng-template pTemplate="content">
+      <p class="auth-kicker">Welcome back</p>
+      <h1>Login to PhoneHub</h1>
+      <p class="auth-copy">Sign in to browse phones, manage your cart, and place orders.</p>
+
+      <div class="login-links">
+        <a class="login-link" [routerLink]="['/login']" [queryParams]="{ returnUrl: returnUrl }" (click)="useGeneralLogin()">
+          Login as general user
+        </a>
+        <a class="login-link" [routerLink]="['/login']" [queryParams]="{ returnUrl: returnUrl, mode: 'admin' }" (click)="useAdminLogin()">
+          Login as admin
+        </a>
+      </div>
+
+      <form class="auth-form" #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+        <label>
+          Email address
+          <input
+            pInputText
+            type="email"
+            name="email"
+            [(ngModel)]="credentials.email"
+            #email="ngModel"
+            required
+            email
+          />
+        </label>
+        <small class="error" *ngIf="email.invalid && email.touched">Enter a valid email address.</small>
+
+        <label>
+          Password
+          <input
+            pInputText
+            type="password"
+            name="password"
+            [(ngModel)]="credentials.password"
+            #password="ngModel"
+            required
+            minlength="6"
+          />
+        </label>
+        <small class="error" *ngIf="password.invalid && password.touched">Password must be at least 6 characters.</small>
+
+        <p class="error-banner" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+        <button pButton type="submit" label="Login" class="p-button-rounded auth-submit" [disabled]="loginForm.invalid"></button>
+      </form>
+
+      <p class="auth-switch">
+        New here?
+        <a routerLink="/signup" [queryParams]="{ returnUrl: returnUrl }">Create an account</a>
+      </p>
+    </ng-template>
+  </p-card>
+</section>
